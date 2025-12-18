@@ -88,7 +88,6 @@ class _LoginApiScreenState extends State<LoginApiScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // Demo account box
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.all(14),
@@ -129,8 +128,6 @@ class _LoginApiScreenState extends State<LoginApiScreen> {
                   ),
                 ),
                 const SizedBox(height: 24),
-
-                // Username field
                 TextField(
                   controller: _userController,
                   decoration: InputDecoration(
@@ -145,8 +142,6 @@ class _LoginApiScreenState extends State<LoginApiScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
-
-                // Password field
                 TextField(
                   controller: _passController,
                   obscureText: true,
@@ -162,8 +157,6 @@ class _LoginApiScreenState extends State<LoginApiScreen> {
                   ),
                 ),
                 const SizedBox(height: 24),
-
-                // Login button
                 isLoading
                     ? const CircularProgressIndicator()
                     : SizedBox(
@@ -185,8 +178,6 @@ class _LoginApiScreenState extends State<LoginApiScreen> {
                         ),
                       ),
                 const SizedBox(height: 16),
-
-                // Optional: Forgot password or other links
                 TextButton(
                   onPressed: () {},
                   child: const Text(

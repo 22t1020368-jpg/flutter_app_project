@@ -58,31 +58,29 @@ class _MyProductState extends State<MyProduct> {
     super.dispose();
   }
 
-  // Responsive: tính số cột theo width
   int getCrossAxisCount(double width) {
-    if (width >= 1200) return 4;
-    if (width >= 900) return 3;
-    if (width >= 600) return 2;
-    return 1;
+    if (width >= 1200) return 5; 
+    if (width >= 900) return 4;
+    if (width >= 600) return 3; 
+    return 2; 
   }
-
-  double getChildAspectRatio(double width) {
-    if (width >= 1200) return 0.7;
-    if (width >= 900) return 0.75;
-    if (width >= 600) return 0.7;
-    return 0.65;
+  String formatCurrency(dynamic number) {
+    return number.toString().replaceAllMapped(
+        RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: const Color(0xFFF5F5FA), 
       appBar: AppBar(
-        title: const Text('Danh sách sản phẩm'),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        title: const Text('Danh sách sản phẩm', style: TextStyle(fontWeight: FontWeight.bold)),
+        backgroundColor: const Color.fromARGB(55, 5, 22, 131),
         automaticallyImplyLeading: false,
-        elevation: 1,
+        foregroundColor: Colors.black,
+
+        elevation: 0,
+        centerTitle: true,
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
@@ -90,22 +88,24 @@ class _MyProductState extends State<MyProduct> {
               ? Center(child: Text(errorMsg))
               : Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 12),
+                    Container(
+                      color: Colors.white,
+                      padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
                       child: TextField(
                         controller: searchController,
                         decoration: InputDecoration(
                           hintText: 'Tìm kiếm sản phẩm...',
-                          prefixIcon: const Icon(Icons.search),
+                          hintStyle: TextStyle(color: Colors.grey[400]),
+                          prefixIcon: Icon(Icons.search, color: Colors.grey[400]),
                           filled: true,
-                          fillColor: Colors.white,
+                          fillColor: Colors.grey[100],
                           contentPadding: const EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 16),
+                              vertical: 10, horizontal: 16),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(24),
+                            borderRadius: BorderRadius.circular(8),
                             borderSide: BorderSide.none,
                           ),
+                          isDense: true,
                         ),
                       ),
                     ),
@@ -114,30 +114,27 @@ class _MyProductState extends State<MyProduct> {
                           ? const Center(
                               child: Text(
                                 'Không tìm thấy sản phẩm',
-                                style: TextStyle(fontSize: 16),
+                                style: TextStyle(fontSize: 16, color: Colors.grey),
                               ),
                             )
                           : LayoutBuilder(
                               builder: (context, constraints) {
                                 int crossAxisCount =
                                     getCrossAxisCount(constraints.maxWidth);
-                                double aspectRatio =
-                                    getChildAspectRatio(constraints.maxWidth);
-                                double horizontalPadding =
-                                    constraints.maxWidth < 600 ? 8 : 16;
-                                double spacing =
-                                    constraints.maxWidth < 600 ? 8 : 16;
+                                double spacing = 8; 
+                                double horizontalPadding = 8;
+                                double itemWidth = (constraints.maxWidth - (horizontalPadding * 2) - (spacing * (crossAxisCount - 1))) / crossAxisCount;
+                                double itemHeight = itemWidth + 115; 
+                                double childAspectRatio = itemWidth / itemHeight;
 
                                 return GridView.builder(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: horizontalPadding,
-                                      vertical: 12),
+                                  padding: EdgeInsets.all(horizontalPadding).copyWith(top: 8),
                                   gridDelegate:
                                       SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: crossAxisCount,
                                     mainAxisSpacing: spacing,
                                     crossAxisSpacing: spacing,
-                                    childAspectRatio: aspectRatio,
+                                    childAspectRatio: childAspectRatio, 
                                   ),
                                   itemCount: filteredProducts.length,
                                   itemBuilder: (context, index) =>
@@ -152,61 +149,87 @@ class _MyProductState extends State<MyProduct> {
   }
 
   Widget _buildProductCard(Product p) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      elevation: 3,
-      shadowColor: Colors.black12,
-      color: Colors.white,
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(4), 
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            offset: const Offset(0, 2),
+            blurRadius: 4,
+          ),
+        ],
+        border: Border.all(color: Colors.grey.shade200),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(
-            borderRadius:
-                const BorderRadius.vertical(top: Radius.circular(16)),
-            child: Image.network(
-              p.image,
-              width: double.infinity,
-              height: 140,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  height: 140,
+          AspectRatio(
+            aspectRatio: 1, 
+            child: ClipRRect(
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(4)),
+              child: Image.network(
+                p.image,
+                fit: BoxFit.cover, 
+                errorBuilder: (context, error, stackTrace) => Container(
                   color: Colors.grey[200],
-                  child: const Icon(Icons.image_not_supported, size: 50),
-                );
-              },
+                  child: const Icon(Icons.image_not_supported,
+                      size: 40, color: Colors.grey),
+                ),
+              ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  p.title,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black87,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    p.title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 13, 
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black87,
+                      height: 1.3,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  p.category.toUpperCase(),
-                  style: TextStyle(fontSize: 12, color: Colors.grey[500]),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  '${p.price.toStringAsFixed(0)} VNĐ',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.redAccent,
+                  const SizedBox(height: 4),
+                  Text(
+                     p.category.toUpperCase(),
+                     style: TextStyle(fontSize: 10, color: Colors.grey[500]),
+                     maxLines: 1,
+                     overflow: TextOverflow.ellipsis,
+                   ),
+
+                  const SizedBox(height: 4),              
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      const Text(
+                        '₫', 
+                        style: TextStyle(
+                          fontSize: 14, 
+                          color: Colors.red, 
+                          decoration: TextDecoration.underline
+                        )
+                      ),
+                      Text(
+                        formatCurrency(p.price),
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red, 
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

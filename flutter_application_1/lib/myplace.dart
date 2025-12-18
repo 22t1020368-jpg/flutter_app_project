@@ -7,7 +7,7 @@ class MyPlace extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false, // ⭐ XÓA ICON BACK
+        automaticallyImplyLeading: false, 
         title: const Text("My Place"),
         backgroundColor: Colors.teal,
         elevation: 4,

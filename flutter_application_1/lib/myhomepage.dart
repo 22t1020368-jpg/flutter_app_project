@@ -19,7 +19,7 @@ class OeschinenLakePage extends StatelessWidget {
   title: const Text("My Homepage"),
   backgroundColor: const Color.fromARGB(0, 13, 162, 192),
   elevation: 0,
-  automaticallyImplyLeading: false, // <-- thêm dòng này
+  automaticallyImplyLeading: false, 
 ),
 
       extendBodyBehindAppBar: true,

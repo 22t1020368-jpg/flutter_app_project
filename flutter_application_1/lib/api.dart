@@ -4,7 +4,7 @@ import 'product.dart';
 
 class test_api {
   static Future<List<Product>> getAllProducts() async {
-    final url = Uri.parse('https://fakestoreapi.com/products'); // API giả lập
+    final url = Uri.parse('https://fakestoreapi.com/products'); 
     final response = await http.get(url);
 
     if (response.statusCode == 200) {

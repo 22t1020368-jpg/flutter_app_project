@@ -86,7 +86,7 @@ class ClassroomCard extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: Colors.black.withOpacity(0.45), // lớp phủ tối
+          color: Colors.black.withOpacity(0.45), 
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

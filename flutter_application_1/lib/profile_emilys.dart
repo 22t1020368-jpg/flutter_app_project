@@ -54,8 +54,6 @@ class ProfileEmilys extends StatelessWidget {
       ),
     );
   }
-
-  // ================== CỘT TRÁI ==================
   Widget _leftColumn() {
     return Column(
       children: [
@@ -152,8 +150,6 @@ class ProfileEmilys extends StatelessWidget {
       ),
     );
   }
-
-  // ================== CỘT PHẢI ==================
   Widget _rightColumn() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

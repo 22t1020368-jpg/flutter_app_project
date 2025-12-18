@@ -21,14 +21,14 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         title: const Text("Form Phản Hồi"),
         backgroundColor: Colors.red,
         centerTitle: true,
-        automaticallyImplyLeading: false, // ❗ BỎ NÚT BACK
+        automaticallyImplyLeading: false, 
       ),
 
       backgroundColor: Colors.grey.shade100,
       body: SafeArea(
         child: Column(
           children: [
-            // HEADER RED BAR
+          
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 14),
@@ -93,8 +93,6 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                     ),
 
                     const SizedBox(height: 16),
-
-                    // Nội dung góp y
                     TextField(
                       controller: _contentController,
                       maxLines: 5,
@@ -109,8 +107,6 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                     ),
 
                     const SizedBox(height: 25),
-
-                    // Nút Gửi phản hồi
                     SizedBox(
                       width: double.infinity,
                       height: 48,

@@ -228,20 +228,19 @@ class SimpleHotelCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _TitleRow(title),
-          _RatingRow(rating, reviewCount),
-          _LocationRow(location, distance),
+          _titleRow(title),
+          _ratingRow(rating, reviewCount),
+          _locationRow(location, distance),
           Text(
             description,
             style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
           ),
-          _Price(price),
+          _price(price),
         ],
       ),
     );
   }
 }
-
 
 class HotelCard extends StatelessWidget {
   final String imageUrl;
@@ -275,9 +274,9 @@ class HotelCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _TitleRow(title),
-          _RatingRow(rating, reviewCount),
-          _LocationRow(location, distance),
+          _titleRow(title),
+          _ratingRow(rating, reviewCount),
+          _locationRow(location, distance),
           Text(
             description,
             style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
@@ -290,13 +289,12 @@ class HotelCard extends StatelessWidget {
             "✔ Không cần thanh toán trước",
             style: TextStyle(fontSize: 11, color: Colors.green),
           ),
-          _Price(price),
+          _price(price),
         ],
       ),
     );
   }
 }
-
 
 class _BaseCard extends StatelessWidget {
   final String imageUrl;
@@ -363,72 +361,72 @@ class _BaseCard extends StatelessWidget {
   }
 }
 
-Widget _TitleRow(String title) => Row(
-  children: [
-    Expanded(
-      child: Text(
-        title,
-        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-      ),
-    ),
-    const Icon(Icons.favorite_border, size: 18),
-  ],
-);
-
-Widget _RatingRow(double rating, int reviews) => Row(
-  children: [
-    Container(
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-      decoration: BoxDecoration(
-        color: Colors.blue,
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Text(
-        rating.toStringAsFixed(1),
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 11,
-          fontWeight: FontWeight.bold,
+Widget _titleRow(String title) => Row(
+      children: [
+        Expanded(
+          child: Text(
+            title,
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          ),
         ),
-      ),
-    ),
-    const SizedBox(width: 6),
-    const Text(
-      "Xuất sắc",
-      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-    ),
-    const SizedBox(width: 4),
-    Text(
-      "· $reviews đánh giá",
-      style: const TextStyle(fontSize: 11, color: Colors.grey),
-    ),
-  ],
-);
+        const Icon(Icons.favorite_border, size: 18),
+      ],
+    );
 
-Widget _LocationRow(String location, String distance) => Row(
-  children: [
-    const Icon(Icons.location_on, size: 14, color: Colors.grey),
-    const SizedBox(width: 2),
-    Text(
-      "$location · Cách bạn $distance",
-      style: const TextStyle(fontSize: 12, color: Colors.black87),
-    ),
-  ],
-);
+Widget _ratingRow(double rating, int reviews) => Row(
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: Text(
+            rating.toStringAsFixed(1),
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 11,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        const SizedBox(width: 6),
+        const Text(
+          "Xuất sắc",
+          style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(width: 4),
+        Text(
+          "· $reviews đánh giá",
+          style: const TextStyle(fontSize: 11, color: Colors.grey),
+        ),
+      ],
+    );
 
-Widget _Price(double price) => Padding(
-  padding: const EdgeInsets.only(top: 6),
-  child: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        "US\$${price.toInt()}",
-        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+Widget _locationRow(String location, String distance) => Row(
+      children: [
+        const Icon(Icons.location_on, size: 14, color: Colors.grey),
+        const SizedBox(width: 2),
+        Text(
+          "$location · Cách bạn $distance",
+          style: const TextStyle(fontSize: 12, color: Colors.black87),
+        ),
+      ],
+    );
+
+Widget _price(double price) => Padding(
+      padding: const EdgeInsets.only(top: 6),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "US\$${price.toInt()}",
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          const Text(
+            "Đã bao gồm thuế và phí",
+            style: TextStyle(fontSize: 11, color: Colors.grey),
+          ),
+        ],
       ),
-      const Text(
-        "Đã bao gồm thuế và phí",
-        style: TextStyle(fontSize: 11, color: Colors.grey),
-      ),
-    ],
-  ),
-);
+    );

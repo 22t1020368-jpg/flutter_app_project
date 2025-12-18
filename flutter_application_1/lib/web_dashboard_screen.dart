@@ -49,7 +49,6 @@ class WebApp extends StatelessWidget {
   }
 }
 
-// ================= ROOT =================
 class RootLayout extends StatefulWidget {
   const RootLayout({super.key});
 
@@ -73,7 +72,7 @@ class _RootLayoutState extends State<RootLayout> {
     {'title': 'Product', 'icon': Icons.shopping_cart, 'route': '/product', 'image': 'assets/images/listproduct.png'},
     {'title': 'News', 'icon': Icons.newspaper, 'route': '/news', 'image': 'assets/images/news.png'},
     {'title': 'Login API', 'icon': Icons.api, 'route': '/login-api', 'image': 'assets/images/loginapi.png'},
-    {'title': 'Travel', 'icon': Icons.api, 'route': '/travel', 'image': 'assets/images/charlie.png'},
+    {'title': 'Travel', 'icon': Icons.place, 'route': '/travel', 'image': 'assets/images/charlie.png'},
   ];
 
   @override
@@ -94,7 +93,6 @@ class _RootLayoutState extends State<RootLayout> {
                       children: [
                         _profileCard(),
                         const SizedBox(height: 30),
-                        // ===== TIÊU ĐỀ Ở ĐÂY (Màn hình nhỏ) =====
                         const Padding(
                           padding: EdgeInsets.only(left: 8.0),
                           child: Text(
@@ -121,7 +119,6 @@ class _RootLayoutState extends State<RootLayout> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // ===== TIÊU ĐỀ Ở ĐÂY (Màn hình lớn) =====
                             const Padding(
                               padding: EdgeInsets.only(bottom: 20, top: 10),
                               child: Text(
@@ -151,7 +148,6 @@ class _RootLayoutState extends State<RootLayout> {
     );
   }
 
-  // ================= PROFILE =================
   Widget _profileCard() {
     return Card(
       elevation: 6,
@@ -177,7 +173,7 @@ class _RootLayoutState extends State<RootLayout> {
             SizedBox(height: 6),
             Center(
               child: Text(
-                'Flutter Mobile & Web Developer',
+                'Lập trình ứng dụng thiết bị di động',
                 style: TextStyle(color: Colors.grey),
               ),
             ),
@@ -192,9 +188,9 @@ class _RootLayoutState extends State<RootLayout> {
             SizedBox(height: 20),
             Text('🛠 Kỹ năng', style: TextStyle(fontWeight: FontWeight.bold)),
             SizedBox(height: 8),
-            Text('• Flutter UI & Navigation'),
-            Text('• REST API cơ bản'),
-            Text('• Flutter Web'),
+            Text('•  Flutter Web'),
+            Text('•  Flutter Web'),
+            Text('•  Flutter Web'),
           ],
         ),
       ),
