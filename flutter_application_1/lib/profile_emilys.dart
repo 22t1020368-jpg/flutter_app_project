@@ -7,292 +7,198 @@ class ProfileEmilys extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 800;
+
     return Scaffold(
-      backgroundColor: const Color(0xFFF0F2F7),
+      backgroundColor: const Color(0xFFF0F2F5),
       appBar: AppBar(
         title: const Text("Profile"),
-        backgroundColor: Colors.indigo.shade700,
-        elevation: 3,
+        backgroundColor: const Color.fromARGB(255, 234, 235, 239),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Center(
           child: Container(
             constraints: const BoxConstraints(maxWidth: 1000),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Sidebar Left
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    padding: const EdgeInsets.all(24),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Colors.indigo.shade700, Colors.indigo.shade500],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.08),
-                          blurRadius: 12,
-                          offset: const Offset(0, 6),
-                        )
-                      ],
-                    ),
-                    child: Column(
-                      children: [
-                        CircleAvatar(
-                          radius: 65,
-                          backgroundColor: Colors.white,
-                          child: CircleAvatar(
-                            radius: 60,
-                            backgroundImage: NetworkImage(user["image"] ?? ""),
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          "${user['firstName'] ?? ''} ${user['lastName'] ?? ''}",
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          "${user['username'] ?? ''}",
-                          style: const TextStyle(
-                            color: Colors.white70,
-                            fontSize: 16,
-                          ),
-                        ),
-                        const SizedBox(height: 24),
-                        Divider(color: Colors.white30),
-                        const SizedBox(height: 16),
-                        _infoSidebar(
-                          icon: Icons.location_on,
-                          label: user["location"] ?? "USA",
-                        ),
-                        _infoSidebar(
-                          icon: Icons.phone,
-                          label: user["phone"] ?? "098 999 0009",
-                        ),
-                        _infoSidebar(
-                          icon: Icons.email,
-                          label: user["email"] ?? "your-email@domain.com",
-                        ),
-                        _infoSidebar(
-                          icon: Icons.web,
-                          label: user["website"] ?? "https://www.facebook.com/",
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-
-                const SizedBox(width: 24),
-
-                // Main Right
-                Expanded(
-                  flex: 5,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _sectionTitle("WORK EXPERIENCE", Icons.work),
-                      _experienceCard(
-                        start: "2013-05",
-                        end: "2013-09",
-                        title: "Part-time English Teaching Assistant",
-                        company: "ABC Center",
-                        description:
-                            "- Build detailed lectures schedule based on varied levels of learners from beginners to intermediate.\n- Assist main coach to check writings, do scoring and assessment.\n- Keep track of student’s English progress to give exact comment.\n- Always inspire students to learning English by stressing importance of learning foreign language.\n- Recognition: Excellent Learning Assistant Award.",
-                      ),
-                      const SizedBox(height: 20),
-                      _sectionTitle("EDUCATION", Icons.school),
-                      _educationCard(
-                        start: "2013-10",
-                        end: "2015-09",
-                        degree: "Bachelor of English Language",
-                        school: "University NYC",
-                        result: "8.5",
-                      ),
-                      const SizedBox(height: 20),
-                      _sectionTitle("COMMUNITY ACTIVITY", Icons.group),
-                      _activityCard(
-                        title: "Volunteer English Teacher",
-                        organization: "Local NGO",
-                        description:
-                            "- Conduct weekly English classes for underprivileged children.\n- Organize educational games and activities.",
-                      ),
-                    ],
-                  ),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 20,
+                  offset: Offset(0, 10),
                 ),
               ],
             ),
+            padding: const EdgeInsets.all(24),
+            child: isMobile
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _leftColumn(),
+                      const SizedBox(height: 24),
+                      _rightColumn(),
+                    ],
+                  )
+                : Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(flex: 1, child: _leftColumn()),
+                      const SizedBox(width: 32),
+                      Expanded(flex: 2, child: _rightColumn()),
+                    ],
+                  ),
           ),
         ),
       ),
     );
   }
 
-  Widget _infoSidebar({required IconData icon, required String label}) {
+  // ================== CỘT TRÁI ==================
+  Widget _leftColumn() {
+    return Column(
+      children: [
+        _cardContainer(child: _avatarCard()),
+        const SizedBox(height: 16),
+        _cardContainer(child: _nameCard()),
+        const SizedBox(height: 16),
+        _cardContainer(child: _contactCard()),
+      ],
+    );
+  }
+
+  Widget _cardContainer({required Widget child}) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 8,
+            offset: Offset(0, 4),
+          ),
+        ],
+      ),
+      child: child,
+    );
+  }
+
+  Widget _avatarCard() {
+    return Column(
+      children: [
+        Container(
+          height: 140,
+          width: 140,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.indigo.shade100,
+            image: user['image'] != null
+                ? DecorationImage(
+                    image: NetworkImage(user['image']),
+                    fit: BoxFit.cover,
+                  )
+                : null,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _nameCard() {
+    return Column(
+      children: [
+        Text(
+          "${user['firstName'] ?? ''} ${user['lastName'] ?? ''}",
+          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 6),
+        Text(
+          user['username'] ?? '',
+          style: TextStyle(fontSize: 16, color: Colors.grey.shade700),
+          textAlign: TextAlign.center,
+        ),
+      ],
+    );
+  }
+
+  Widget _contactCard() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _contactItem(Icons.location_on, user["location"] ?? "USA"),
+        _contactItem(Icons.phone, user["phone"] ?? "098 999 0009"),
+        _contactItem(Icons.email, user["email"] ?? "your-email@domain.com"),
+        _contactItem(Icons.web, user["website"] ?? "https://www.facebook.com/"),
+      ],
+    );
+  }
+
+  Widget _contactItem(IconData icon, String text) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         children: [
-          Icon(icon, color: Colors.white, size: 22),
-          const SizedBox(width: 12),
+          Icon(icon, size: 18, color: Colors.indigo),
+          const SizedBox(width: 6),
           Flexible(
-            child: Text(
-              label,
-              style: const TextStyle(color: Colors.white70, fontSize: 15),
-            ),
+            child: Text(text, style: TextStyle(color: Colors.grey.shade800)),
           ),
         ],
       ),
     );
   }
 
-  Widget _sectionTitle(String title, IconData icon) {
+  // ================== CỘT PHẢI ==================
+  Widget _rightColumn() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _sectionTitle("Work Experience"),
+        _simpleCard("2013-05 - 2013-09", "English Teaching Assistant", "ABC Center"),
+        _simpleCard("2014-01 - 2015-09", "English Tutor", "XYZ Academy"),
+        const SizedBox(height: 16),
+        _sectionTitle("Education"),
+        _simpleCard("2013-10 - 2015-09", "Bachelor of English Language", "University NYC"),
+        const SizedBox(height: 16),
+        _sectionTitle("Community Activity"),
+        _simpleCard("", "Volunteer English Teacher", "Local NGO"),
+      ],
+    );
+  }
+
+  Widget _sectionTitle(String title) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 14),
-      child: Row(
-        children: [
-          Icon(icon, color: Colors.indigo.shade700),
-          const SizedBox(width: 10),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.grey.shade900,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _experienceCard({
-    required String start,
-    required String end,
-    required String title,
-    required String company,
-    required String description,
-  }) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      elevation: 3,
-      shadowColor: Colors.grey.shade300,
-      color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.all(18),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "$start - $end",
-              style: TextStyle(color: Colors.grey.shade600, fontSize: 13),
-            ),
-            const SizedBox(height: 6),
-            Text(
-              title,
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black87),
-            ),
-            Text(
-              company,
-              style: TextStyle(color: Colors.grey.shade700, fontSize: 14),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              description,
-              style: TextStyle(color: Colors.grey.shade800, fontSize: 14, height: 1.5),
-            ),
-          ],
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Text(
+        title,
+        style: const TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: Colors.indigo,
         ),
       ),
     );
   }
 
-  Widget _educationCard({
-    required String start,
-    required String end,
-    required String degree,
-    required String school,
-    required String result,
-  }) {
+  Widget _simpleCard(String period, String title, String subtitle) {
     return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      elevation: 3,
-      shadowColor: Colors.grey.shade300,
-      color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.all(18),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "$start - $end",
-              style: TextStyle(color: Colors.grey.shade600, fontSize: 13),
-            ),
-            const SizedBox(height: 6),
-            Text(
-              degree,
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black87),
-            ),
-            Text(
-              school,
-              style: TextStyle(color: Colors.grey.shade700, fontSize: 14),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              "Total result: $result",
-              style: TextStyle(color: Colors.grey.shade800, fontSize: 14),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _activityCard({
-    required String title,
-    required String organization,
-    required String description,
-  }) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       elevation: 2,
-      shadowColor: Colors.grey.shade300,
-      color: Colors.white,
+      margin: const EdgeInsets.symmetric(vertical: 6),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              title,
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black87),
-            ),
-            Text(
-              organization,
-              style: TextStyle(color: Colors.grey.shade700, fontSize: 14),
-            ),
-            const SizedBox(height: 6),
-            Text(
-              description,
-              style: TextStyle(color: Colors.grey.shade800, fontSize: 14, height: 1.5),
-            ),
+            if (period.isNotEmpty)
+              Text(period, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+            Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            Text(subtitle, style: TextStyle(color: Colors.grey.shade700)),
           ],
         ),
       ),
