@@ -47,6 +47,7 @@ class _BMIScreenState extends State<BMIScreen> {
       appBar: AppBar(
         title: Text("Tính BMI"),
         backgroundColor: Color(0xff0a6847),
+        automaticallyImplyLeading: false,
         // leading: IconButton(
         //   icon: Icon(Icons.arrow_back),
         //   onPressed: () {

@@ -11,6 +11,7 @@ class NewsListScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("⚽ Thể Thao Thế Giới"),
         centerTitle: true,
+        automaticallyImplyLeading: false,
         backgroundColor: const Color.fromARGB(209, 189, 11, 11)
       ),
       body: FutureBuilder(

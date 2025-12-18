@@ -18,7 +18,7 @@ class ProfileEmilys extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Center(
           child: Container(
-            constraints: const BoxConstraints(maxWidth: 900),
+            constraints: const BoxConstraints(maxWidth: 1000),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -33,21 +33,24 @@ class ProfileEmilys extends StatelessWidget {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                       ),
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 10,
-                          offset: const Offset(0, 5),
+                          color: Colors.black.withOpacity(0.08),
+                          blurRadius: 12,
+                          offset: const Offset(0, 6),
                         )
                       ],
                     ),
                     child: Column(
                       children: [
                         CircleAvatar(
-                          radius: 60,
-                          backgroundImage: NetworkImage(user["image"] ?? ""),
-                          backgroundColor: Colors.grey.shade200,
+                          radius: 65,
+                          backgroundColor: Colors.white,
+                          child: CircleAvatar(
+                            radius: 60,
+                            backgroundImage: NetworkImage(user["image"] ?? ""),
+                          ),
                         ),
                         const SizedBox(height: 16),
                         Text(
@@ -55,7 +58,7 @@ class ProfileEmilys extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 22,
+                            fontSize: 24,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -68,6 +71,8 @@ class ProfileEmilys extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 24),
+                        Divider(color: Colors.white30),
+                        const SizedBox(height: 16),
                         _infoSidebar(
                           icon: Icons.location_on,
                           label: user["location"] ?? "USA",
@@ -106,7 +111,7 @@ class ProfileEmilys extends StatelessWidget {
                         description:
                             "- Build detailed lectures schedule based on varied levels of learners from beginners to intermediate.\n- Assist main coach to check writings, do scoring and assessment.\n- Keep track of student’s English progress to give exact comment.\n- Always inspire students to learning English by stressing importance of learning foreign language.\n- Recognition: Excellent Learning Assistant Award.",
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 20),
                       _sectionTitle("EDUCATION", Icons.school),
                       _educationCard(
                         start: "2013-10",
@@ -115,7 +120,7 @@ class ProfileEmilys extends StatelessWidget {
                         school: "University NYC",
                         result: "8.5",
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 20),
                       _sectionTitle("COMMUNITY ACTIVITY", Icons.group),
                       _activityCard(
                         title: "Volunteer English Teacher",
@@ -139,12 +144,12 @@ class ProfileEmilys extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         children: [
-          Icon(icon, color: Colors.white, size: 20),
-          const SizedBox(width: 10),
+          Icon(icon, color: Colors.white, size: 22),
+          const SizedBox(width: 12),
           Flexible(
             child: Text(
               label,
-              style: const TextStyle(color: Colors.white70, fontSize: 14),
+              style: const TextStyle(color: Colors.white70, fontSize: 15),
             ),
           ),
         ],
@@ -154,7 +159,7 @@ class ProfileEmilys extends StatelessWidget {
 
   Widget _sectionTitle(String title, IconData icon) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12),
+      padding: const EdgeInsets.symmetric(vertical: 14),
       child: Row(
         children: [
           Icon(icon, color: Colors.indigo.shade700),
@@ -162,7 +167,7 @@ class ProfileEmilys extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
               color: Colors.grey.shade900,
             ),
@@ -181,9 +186,10 @@ class ProfileEmilys extends StatelessWidget {
   }) {
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 8),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       elevation: 3,
       shadowColor: Colors.grey.shade300,
+      color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.all(18),
         child: Column(
@@ -203,10 +209,10 @@ class ProfileEmilys extends StatelessWidget {
               company,
               style: TextStyle(color: Colors.grey.shade700, fontSize: 14),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 10),
             Text(
               description,
-              style: TextStyle(color: Colors.grey.shade800, fontSize: 14, height: 1.4),
+              style: TextStyle(color: Colors.grey.shade800, fontSize: 14, height: 1.5),
             ),
           ],
         ),
@@ -223,9 +229,10 @@ class ProfileEmilys extends StatelessWidget {
   }) {
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 8),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       elevation: 3,
       shadowColor: Colors.grey.shade300,
+      color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.all(18),
         child: Column(
@@ -263,9 +270,10 @@ class ProfileEmilys extends StatelessWidget {
   }) {
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 8),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       elevation: 2,
       shadowColor: Colors.grey.shade300,
+      color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -283,7 +291,7 @@ class ProfileEmilys extends StatelessWidget {
             const SizedBox(height: 6),
             Text(
               description,
-              style: TextStyle(color: Colors.grey.shade800, fontSize: 14, height: 1.4),
+              style: TextStyle(color: Colors.grey.shade800, fontSize: 14, height: 1.5),
             ),
           ],
         ),

@@ -7,16 +7,12 @@ class MyPlace extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Place"),
+        automaticallyImplyLeading: false, // ⭐ XÓA ICON BACK
+        title: const Text("My Place"),
         backgroundColor: Colors.teal,
         elevation: 4,
-        // leading: IconButton(
-        //   icon: Icon(Icons.arrow_back, color: Colors.white),
-        //   onPressed: () {
-        //     Navigator.pushNamed(context, "/main_home");
-        //   },
-        // ),
       ),
+
       body: myBody(),
     );
   }
@@ -81,10 +77,7 @@ class MyPlace extends StatelessWidget {
           Row(
             children: [
               const Icon(Icons.star, color: Colors.orange, size: 26),
-              Text(
-                votePlace,
-                style: const TextStyle(fontSize: 18),
-              ),
+              Text(votePlace, style: const TextStyle(fontSize: 18)),
             ],
           ),
         ],
@@ -133,7 +126,10 @@ class MyPlace extends StatelessWidget {
         Text(
           label,
           style: const TextStyle(
-              fontSize: 14, fontWeight: FontWeight.w500, color: Colors.teal),
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            color: Colors.teal,
+          ),
         ),
       ],
     );

@@ -81,6 +81,7 @@ class _MyProductState extends State<MyProduct> {
         title: const Text('Danh sách sản phẩm'),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
+        automaticallyImplyLeading: false,
         elevation: 1,
       ),
       body: isLoading

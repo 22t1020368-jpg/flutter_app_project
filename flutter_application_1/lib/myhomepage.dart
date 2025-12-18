@@ -16,16 +16,12 @@ class OeschinenLakePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Homepage"),
-        backgroundColor: const Color.fromARGB(0, 13, 162, 192),
-        elevation: 0,
-        // leading: IconButton(
-        //   icon: Icon(Icons.arrow_back, color: const Color.fromARGB(255, 0, 0, 0)),
-        //   onPressed: () {
-        //     Navigator.pushNamed(context, "/main_home");
-        //   },
-        // ),
-      ),
+  title: const Text("My Homepage"),
+  backgroundColor: const Color.fromARGB(0, 13, 162, 192),
+  elevation: 0,
+  automaticallyImplyLeading: false, // <-- thêm dòng này
+),
+
       extendBodyBehindAppBar: true,
       body: ListView(
         children: [

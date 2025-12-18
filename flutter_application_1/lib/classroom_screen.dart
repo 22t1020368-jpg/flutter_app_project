@@ -39,7 +39,7 @@ class ClassroomScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 212, 206, 206),
       body: SafeArea(
         child: ListView.builder(
           padding: const EdgeInsets.all(12),

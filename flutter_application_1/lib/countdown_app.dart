@@ -83,6 +83,7 @@ class _CountdownTimerScreenState extends State<CountdownTimerScreen> {
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: const EdgeInsets.all(24.0),

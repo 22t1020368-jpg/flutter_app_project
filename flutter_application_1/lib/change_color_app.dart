@@ -43,6 +43,7 @@ class _ChangeColorAppState extends State<ChangeColorApp> {
       appBar: AppBar(
         title: const Text("Ứng dụng đổi màu nền"),
         backgroundColor: Colors.blue,
+        automaticallyImplyLeading: false,
       ),
       backgroundColor: backgroundColor,
       body: Column(

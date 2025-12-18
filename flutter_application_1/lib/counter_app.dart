@@ -44,6 +44,7 @@ class _CounterScreenState extends State<CounterScreen> {
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: Column(
